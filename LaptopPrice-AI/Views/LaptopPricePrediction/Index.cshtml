@@ -1,0 +1,77 @@
+﻿@model LaptopPrice_AI.Models.LaptopData
+
+<style>
+    /* Style for form labels */
+    label {
+        display: inline-block;
+        width: 120px; /* Adjust width as needed */
+        margin-bottom: 5px;
+    }
+
+    /* Style for form inputs */
+    input[type="text"],
+    input[type="number"],
+    input[type="checkbox"] {
+        width: 200px; /* Adjust width as needed */
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    /* Style for submit button */
+    input[type="submit"] {
+        width: auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* Style for predicted price */
+    .predicted-price {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+
+<form asp-controller="LaptopPricePrediction" method="post" asp-action="PredictPrice">
+    <!-- Input fields for laptop specs -->
+    <label>CPU:</label>
+    <input type="text" asp-for="CPU" /> <br />
+
+    <label>GHz:</label>
+    <input type="number" asp-for="GHz" step="0.01" /> <br />
+
+    <label>GPU:</label>
+    <input type="text" asp-for="GPU" /> <br />
+
+    <label>RAM:</label>
+    <input type="number" asp-for="RAM" /> <br />
+
+    <label>RAM Type:</label>
+    <input type="text" asp-for="RAMType" /><br />
+
+    <label>Screen (size):</label>
+    <input type="number" asp-for="Screen" step="0.1" /><br />
+
+    <label>Storage:</label>
+    <input type="number" asp-for="Storage" /><br />
+
+    <label>SSD:</label>
+    <input type="checkbox" asp-for="SSD" /><br />
+
+    <label>Weight:</label>
+    <input type="number" asp-for="Weight" step="0.01" /><br />
+
+    <input type="submit" value="Predict Price" />
+
+</form>
+
+@if (ViewBag.PredictedPrice != null)
+{
+    <p>Predicted Price: @ViewBag.PredictedPrice </p>
+}
