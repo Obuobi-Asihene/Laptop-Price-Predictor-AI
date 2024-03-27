@@ -38,7 +38,7 @@
 <form asp-controller="LaptopPricePrediction" method="post" asp-action="PredictPrice">
     <!-- Input fields for laptop specs -->
     <label>CPU:</label>
-    <input type="text" asp-for="CPU" /> <br />
+    <input type="text" asp-for="CPU" required/> <br />
 
     <label>GHz:</label>
     <input type="number" asp-for="GHz" step="0.01" /> <br />
