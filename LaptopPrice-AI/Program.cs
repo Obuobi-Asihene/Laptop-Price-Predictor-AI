@@ -1,7 +1,11 @@
+using LaptopPrice_AI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<ILaptopPricePredictionService, LaptopPricePredictionService>();
 
 var app = builder.Build();
 
