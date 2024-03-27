@@ -32,13 +32,17 @@
         margin-top: 10px;
         font-weight: bold;
     }
+
+    div {
+        padding: 10px 20px;
+    }
 </style>
 
 
 <form asp-controller="LaptopPricePrediction" method="post" asp-action="PredictPrice">
     <!-- Input fields for laptop specs -->
     <label>CPU:</label>
-    <input type="text" asp-for="CPU" required/> <br />
+    <input type="text" asp-for="CPU" /> <br />
 
     <label>GHz:</label>
     <input type="number" asp-for="GHz" step="0.01" /> <br />
@@ -64,11 +68,18 @@
     <label>Weight:</label>
     <input type="number" asp-for="Weight" step="0.01" /><br />
 
-    <input type="submit" value="Predict Price" />
+    <input type="submit" value="Predict Price" class="btn btn-primary mb-3"/>
 
 </form>
 
 @if (ViewBag.PredictedPrice != null)
 {
     <p>Predicted Price: @ViewBag.PredictedPrice </p>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger mb-3" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
 }
