@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "F0tqvi6YTzizM0TaqslrTKXwK6TZeqGJeOzEZPzhL6xrR5EbLf31MmUOUFGqqDc+6COJaKpq0aMc/WyFpf/FTg==",
+  "dgSpecHash": "kHuGfQA6tGcotJsC/bfylVe5+2E8cxZNhrxUSeyEZ4Z7pM1Ok2SU7NXF5SeweHsq5abDqEy3twOOsYi3mIsHaQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Yakubu\\source\\repos\\AFS AI-ML Test\\LaptopPrice-AI\\LaptopPrice-AI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Yakubu\\.nuget\\packages\\lightgbm\\3.3.5\\lightgbm.3.3.5.nupkg.sha512",
     "C:\\Users\\Yakubu\\.nuget\\packages\\microsoft.ml\\3.0.1\\microsoft.ml.3.0.1.nupkg.sha512",
     "C:\\Users\\Yakubu\\.nuget\\packages\\microsoft.ml.cpumath\\3.0.1\\microsoft.ml.cpumath.3.0.1.nupkg.sha512",
     "C:\\Users\\Yakubu\\.nuget\\packages\\microsoft.ml.dataview\\3.0.1\\microsoft.ml.dataview.3.0.1.nupkg.sha512",
+    "C:\\Users\\Yakubu\\.nuget\\packages\\microsoft.ml.fasttree\\3.0.1\\microsoft.ml.fasttree.3.0.1.nupkg.sha512",
+    "C:\\Users\\Yakubu\\.nuget\\packages\\microsoft.ml.lightgbm\\3.0.1\\microsoft.ml.lightgbm.3.0.1.nupkg.sha512",
     "C:\\Users\\Yakubu\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Yakubu\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Yakubu\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
