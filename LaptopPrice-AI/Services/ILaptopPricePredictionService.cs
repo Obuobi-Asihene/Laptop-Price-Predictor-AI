@@ -1,10 +1,10 @@
-﻿using LaptopPrice_AI.Models;
+﻿using LaptopPrice_AI.ViewModels;
 
 namespace LaptopPrice_AI.Services
 {
     public interface ILaptopPricePredictionService
     {
-        float PredictPrice(LaptopData input);
+        float PredictPrice(LaptopDataViewModel input);
         List<string> LoadCPUsFromCSV();
     }
 }

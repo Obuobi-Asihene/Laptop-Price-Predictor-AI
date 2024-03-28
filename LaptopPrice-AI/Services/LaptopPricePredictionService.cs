@@ -1,4 +1,5 @@
 ﻿using LaptopPrice_AI.Models;
+using LaptopPrice_AI.ViewModels;
 using Microsoft.ML;
 
 namespace LaptopPrice_AI.Services
@@ -36,15 +37,30 @@ namespace LaptopPrice_AI.Services
         }
 
         // method to predict laptop price based on specs
-        public float PredictPrice(LaptopData input)
+        public float PredictPrice(LaptopDataViewModel input)
         {
+            // Convert ViewModel to Model
+            var laptopData = new LaptopData
+            {
+                CPU = input.CPU,
+                GHz = input.GHz,
+                GPU = input.GPU,
+                RAM = input.RAM,
+                RAMType = input.RAMType,
+                Screen = input.Screen,
+                Storage = input.Storage,
+                SSD = input.SSD,
+                Weight = input.Weight
+            };
+
             // validate input
             if (input == null) 
-                throw new ArgumentNullException(nameof(input), "Input data cannot be null");
+                throw new ArgumentNullException(nameof(laptopData), "Input data cannot be null");
 
             try
             {
-                var prediction = _predictionEngine.Predict(input);
+                var prediction = _predictionEngine.Predict(laptopData);
+
                 return prediction.Price;
             }
             catch (Exception ex)

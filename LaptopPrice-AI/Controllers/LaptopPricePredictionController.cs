@@ -1,5 +1,5 @@
-using LaptopPrice_AI.Models;
 using LaptopPrice_AI.Services;
+using LaptopPrice_AI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaptopPrice_AI.Controllers
@@ -15,11 +15,11 @@ namespace LaptopPrice_AI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(new LaptopDataViewModel());
         }
 
         [HttpPost]
-        public IActionResult PredictPrice(LaptopData input)
+        public IActionResult PredictPrice(LaptopDataViewModel input)
         {
             // validate input data
             if (!ModelState.IsValid)
@@ -36,11 +36,12 @@ namespace LaptopPrice_AI.Controllers
             {
                 ViewBag.ErrorMessage = "Unrecognized CPU. Please provide a valid CPU.";
                 return View("Index", input);
-            } 
-           
+            }
+
             //predict the price using input data
-            var predictedPrice = _predictionService.PredictPrice(input);
-            ViewBag.PredictedPrice = predictedPrice;
+             var predictedPrice = _predictionService.PredictPrice(input);
+             ViewBag.PredictedPrice = predictedPrice;
+
             return View("Index", input);
             
         }
