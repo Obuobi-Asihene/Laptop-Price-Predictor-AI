@@ -1,4 +1,4 @@
-﻿@model LaptopPrice_AI.ViewModels.LaptopDataViewModel
+﻿@model LaptopDataViewModel
 
 <style>
     label {
@@ -42,31 +42,31 @@
 <form asp-controller="LaptopPricePrediction" method="post" asp-action="PredictPrice">
     <!-- Input fields for laptop specs -->
     <label>CPU:</label>
-    <input type="text" asp-for="CPU" /> <br />
+    <input type="text" asp-for="CPU" required /> <br />
 
     <label>GHz:</label>
-    <input type="number" asp-for="GHz" step="0.01" /> <br />
+    <input type="number" asp-for="GHz" step="0.01" required /> <br />
 
     <label>GPU:</label>
-    <input type="text" asp-for="GPU" /> <br />
+    <input type="text" asp-for="GPU" required /> <br />
 
     <label>RAM:</label>
-    <input type="number" asp-for="RAM" /> <br />
+    <input type="number" asp-for="RAM" required /> <br />
 
     <label>RAM Type:</label>
-    <input type="text" asp-for="RAMType" /><br />
+    <input type="text" asp-for="RAMType" required /><br />
 
     <label>Screen (size):</label>
-    <input type="number" asp-for="Screen" step="0.1" /><br />
+    <input type="number" asp-for="Screen" step="0.1" required /><br />
 
     <label>Storage:</label>
-    <input type="number" asp-for="Storage" /><br />
+    <input type="number" asp-for="Storage" required /><br />
 
     <label>SSD:</label>
     <input type="checkbox" asp-for="SSD" /><br />
 
     <label>Weight:</label>
-    <input type="number" asp-for="Weight" step="0.01" /><br />
+    <input type="number" asp-for="Weight" step="0.01" required /><br />
 
     <input type="submit" value="Predict Price" class="btn btn-primary mb-3"/>
 

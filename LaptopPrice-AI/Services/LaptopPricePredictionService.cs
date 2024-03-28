@@ -1,5 +1,4 @@
 ﻿using LaptopPrice_AI.Models;
-using LaptopPrice_AI.ViewModels;
 using Microsoft.ML;
 
 namespace LaptopPrice_AI.Services

@@ -1,4 +1,4 @@
-﻿using LaptopPrice_AI.ViewModels;
+﻿using LaptopPrice_AI.Models;
 
 namespace LaptopPrice_AI.Services
 {

@@ -1,5 +1,5 @@
+using LaptopPrice_AI.Models;
 using LaptopPrice_AI.Services;
-using LaptopPrice_AI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaptopPrice_AI.Controllers
@@ -21,12 +21,6 @@ namespace LaptopPrice_AI.Controllers
         [HttpPost]
         public IActionResult PredictPrice(LaptopDataViewModel input)
         {
-            // validate input data
-            if (!ModelState.IsValid)
-            {
-                ViewBag.ErrorMessage = "Form Invalid";
-                return View("Index", input);
-            }
             
             // Load list of CPU in CSV file
             var listCPUs = _predictionService.LoadCPUsFromCSV();
