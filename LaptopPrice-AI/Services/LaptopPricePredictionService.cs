@@ -18,12 +18,13 @@ namespace LaptopPrice_AI.Services
             
             // Defining the training pipeline
             var trainer = _mLContext.Regression.Trainers.LightGbm(labelColumnName: "Price", featureColumnName: "Features");
+
             var pipeline = _mLContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Price")
-                .Append(_mLContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "CPUEncoded", inputColumnName: "CPU"))
-                .Append(_mLContext.Transforms.NormalizeMinMax(outputColumnName: "GHzNormalized", inputColumnName: "GHz"))
-                .Append(_mLContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "GPUEncoded", inputColumnName: "GPU"))
-                .Append(_mLContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "RAMTypeEncoded", inputColumnName: "RAMType"))
-                .Append(_mLContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "SSDEncoded", inputColumnName: "SSD"))
+                .Append(_mLContext.Transforms.Categorical.OneHotEncoding("CPUEncoded", "CPU"))
+                .Append(_mLContext.Transforms.NormalizeMinMax("GHzNormalized", "GHz"))
+                .Append(_mLContext.Transforms.Categorical.OneHotEncoding("GPUEncoded", "GPU"))
+                .Append(_mLContext.Transforms.Categorical.OneHotEncoding("RAMTypeEncoded", "RAMType"))
+                .Append(_mLContext.Transforms.Categorical.OneHotEncoding("SSDEncoded", "SSD"))
                 .Append(_mLContext.Transforms.Concatenate("Features", "CPUEncoded", "GHzNormalized", "GPUEncoded", "RAM", "RAMTypeEncoded", "Screen", "Storage", "SSDEncoded", "Weight"))
                 .Append(trainer);
 
@@ -37,8 +38,22 @@ namespace LaptopPrice_AI.Services
         // method to predict laptop price based on specs
         public float PredictPrice(LaptopData input)
         {
-            var prediction = _predictionEngine.Predict(input);
-            return prediction.Price;
+            // validate input
+            if (input == null) 
+                throw new ArgumentNullException(nameof(input), "Input data cannot be null");
+
+            try
+            {
+                var prediction = _predictionEngine.Predict(input);
+                return prediction.Price;
+            }
+            catch (Exception ex)
+            {
+                // Log exception
+                Console.WriteLine($"Error Predicting Price: {ex.Message}");
+
+                return 0;
+            }
         }
 
         // method to load CPUs from CSV file
@@ -46,19 +61,27 @@ namespace LaptopPrice_AI.Services
         {
             List<string> listCPUs = new List<string>();
 
-            using (var reader = new StreamReader("laptopprices.csv"))
+            try
             {
-                reader.ReadLine();
-
-                // Read CPU data from each line and add to the list of CPUs
-                while (!reader.EndOfStream)
+                using (var reader = new StreamReader("laptopprices.csv"))
                 {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',');
+                    reader.ReadLine();
 
-                    var cpu = values[0].Trim();
-                    listCPUs.Add(cpu);
+                    // Read CPU data from each line and add to the list of CPUs
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+
+                        var cpu = values[0].Trim();
+                        listCPUs.Add(cpu);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Log exception
+                Console.WriteLine($"Error loading CPUs from CSV: {ex.Message}");
             }
 
             return listCPUs;
