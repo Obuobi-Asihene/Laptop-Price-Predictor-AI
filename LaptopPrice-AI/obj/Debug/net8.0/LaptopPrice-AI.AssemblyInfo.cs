@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LaptopPrice-AI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+beb199d902de7309969590600c28b28ad32d847e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79fb7ac48ff7621320ade5f721699e2abe860524")]
 [assembly: System.Reflection.AssemblyProductAttribute("LaptopPrice-AI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LaptopPrice-AI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

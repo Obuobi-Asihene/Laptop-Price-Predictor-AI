@@ -29,7 +29,7 @@ namespace LaptopPrice_AI.Controllers
             }
             
             // Load list of CPU in CSV file
-            var listCPUs = LoadCPUsFromCSV();
+            var listCPUs = _predictionService.LoadCPUsFromCSV();
 
             // validate CPU
             if (!listCPUs.Contains(input.CPU))
@@ -43,29 +43,6 @@ namespace LaptopPrice_AI.Controllers
             ViewBag.PredictedPrice = predictedPrice;
             return View("Index", input);
             
-        }
-
-        // method to load CPUs from CSV file
-        private static List<string> LoadCPUsFromCSV()
-        {
-            List<string> listCPUs = new List<string>();
-
-            using (var reader = new StreamReader("laptopprices.csv"))
-            {
-                reader.ReadLine();
-
-                // Read CPU data from each line and add to the list of CPUs
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(',');
-
-                    var cpu = values[0].Trim();
-                    listCPUs.Add(cpu);
-                }
-            }
-
-            return listCPUs;
         }
     }
 }

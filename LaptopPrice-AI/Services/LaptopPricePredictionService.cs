@@ -40,5 +40,28 @@ namespace LaptopPrice_AI.Services
             var prediction = _predictionEngine.Predict(input);
             return prediction.Price;
         }
+
+        // method to load CPUs from CSV file
+        public List<string> LoadCPUsFromCSV()
+        {
+            List<string> listCPUs = new List<string>();
+
+            using (var reader = new StreamReader("laptopprices.csv"))
+            {
+                reader.ReadLine();
+
+                // Read CPU data from each line and add to the list of CPUs
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+
+                    var cpu = values[0].Trim();
+                    listCPUs.Add(cpu);
+                }
+            }
+
+            return listCPUs;
+        }
     }
 }
