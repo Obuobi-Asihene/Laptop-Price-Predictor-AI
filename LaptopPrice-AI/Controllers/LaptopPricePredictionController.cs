@@ -21,14 +21,14 @@ namespace LaptopPrice_AI.Controllers
         [HttpPost]
         public IActionResult PredictPrice(LaptopData input)
         {
-            // validate input
+            // validate input data
             if (!ModelState.IsValid)
             {
                 ViewBag.ErrorMessage = "Form Invalid";
                 return View("Index", input);
             }
             
-            // Load list of CPU in csv
+            // Load list of CPU in CSV file
             var listCPUs = LoadCPUsFromCSV();
 
             // validate CPU
@@ -37,14 +37,15 @@ namespace LaptopPrice_AI.Controllers
                 ViewBag.ErrorMessage = "Unrecognized CPU. Please provide a valid CPU.";
                 return View("Index", input);
             } 
-            
-
+           
+            //predict the price using input data
             var predictedPrice = _predictionService.PredictPrice(input);
             ViewBag.PredictedPrice = predictedPrice;
             return View("Index", input);
             
         }
 
+        // method to load CPUs from CSV file
         private static List<string> LoadCPUsFromCSV()
         {
             List<string> listCPUs = new List<string>();
@@ -53,6 +54,7 @@ namespace LaptopPrice_AI.Controllers
             {
                 reader.ReadLine();
 
+                // Read CPU data from each line and add to the list of CPUs
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();

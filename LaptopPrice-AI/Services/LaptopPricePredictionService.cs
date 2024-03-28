@@ -10,8 +10,13 @@ namespace LaptopPrice_AI.Services
 
         public LaptopPricePredictionService()
         {
+            // initializing MLContext
             _mLContext = new MLContext();
+
+            // Loading dataset from CSV file
             var dataView = _mLContext.Data.LoadFromTextFile<LaptopData>("laptopprices.csv", separatorChar: ',', hasHeader: true);
+            
+            // Defining the training pipeline
             var trainer = _mLContext.Regression.Trainers.LightGbm(labelColumnName: "Price", featureColumnName: "Features");
             var pipeline = _mLContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "Price")
                 .Append(_mLContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "CPUEncoded", inputColumnName: "CPU"))
@@ -21,10 +26,15 @@ namespace LaptopPrice_AI.Services
                 .Append(_mLContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "SSDEncoded", inputColumnName: "SSD"))
                 .Append(_mLContext.Transforms.Concatenate("Features", "CPUEncoded", "GHzNormalized", "GPUEncoded", "RAM", "RAMTypeEncoded", "Screen", "Storage", "SSDEncoded", "Weight"))
                 .Append(trainer);
+
+            // Training the model
             var model = pipeline.Fit(dataView);
+
+            // Create prediction engine
             _predictionEngine = _mLContext.Model.CreatePredictionEngine<LaptopData, LaptopDataPrediction>(model);
         }
 
+        // method to predict laptop price based on specs
         public float PredictPrice(LaptopData input)
         {
             var prediction = _predictionEngine.Predict(input);
